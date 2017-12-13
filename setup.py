@@ -17,7 +17,7 @@ except ImportError:
     read_md = lambda f: open(f, 'r').read()
 
 from os import path
-setup(name='code',
+setup(name='pyfiles',
       version='0.0.1',
       description='First unit testing for Ch2',
       long_description= "" if not path.isfile("README.md") else read_md('README.md'),
@@ -32,7 +32,7 @@ setup(name='code',
           "matplotlib",
           "matplotlib.pyplot",
       ],
-      packages=['code'],
+      packages=['pyfiles'],
       # scripts=[''],
       include_package_data=True,
       classifiers=[
