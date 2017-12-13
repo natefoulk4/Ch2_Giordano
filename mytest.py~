@@ -1,0 +1,12 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+t = np.arange(0.,5.,0.2)
+gravity = 9.81
+xVelocity = math.cos(angle) * initialVelocity
+yVelocity = math.sin(angle) * initialVelocity
+y = eval( "(yVelocity * t - (1/2)*gravity*(t**2))")
+
+plt.plot(t,y)
+plt.show()

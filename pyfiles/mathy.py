@@ -1,0 +1,85 @@
+import math
+
+gravity = 9.81
+dragconstant = 4e-5
+
+def noDrag(x,y,xVelocity,yVelocity,i,timestep):
+    """Given the x and y positions and x and y velocities, this program returns the new x,y positions and x,y velocities, one timestep later. Not taking into account neither drag nor variable air density
+
+    ARGS:
+        x (list): List of previous x positions
+        y (list): List of previous y positions
+        xVelocity (list): List of previous x velocities
+        yVelocity (list): List of previous y velocities
+        i (int): The iterator count
+        timestep: The timestep
+
+    RETURNS:
+        x (list of floats): same list of x positions, with new x position appended to the previous list
+        y (list of floats): same list of y positions, with new y position appended to the previous list
+        xVelocity (list of floats): same list of x velocities, with new x velocity appended to the previous list
+        yVelocity (list of floats): same list of y velocities, with new y velocity appended to the previous list
+    """
+    
+    xVelocity.append(float(xVelocity[i]))
+    x.append(float(x[i] + xVelocity[i] * timestep))
+    yVelocity.append(float(yVelocity[i] - (gravity * timestep)))
+    y.append(float(y[i] + yVelocity[i] * timestep))
+
+    return x,y,xVelocity,yVelocity
+
+def wDrag(x,y,xVelocity,yVelocity,Velocity,i,timestep):
+    """Given the x and y positions and x and y velocities, this program returns the new x,y positions and x,y velocities, one timestep later. Taking into account drag but not variable air density
+
+    ARGS:
+        x (list): List of previous x positions
+        y (list): List of previous y positions
+        xVelocity (list): List of previous x velocities
+        yVelocity (list): List of previous y velocities
+        i (int): The iterator count
+        timestep: The timestep
+
+    RETURNS:
+        x (list of floats): same list of x positions, with new x position appended to the previous list
+        y (list of floats): same list of y positions, with new y position appended to the previous list
+        xVelocity (list of floats): same list of x velocities, with new x velocity appended to the previous list
+        yVelocity (list of floats): same list of y velocities, with new y velocity appended to the previous list
+    """
+    
+    xVelocity.append(float(xVelocity[i] - (dragconstant * xVelocity[i] * Velocity[i] * timestep)))
+    x.append(float(x[i] + xVelocity[i] * timestep))
+    yVelocity.append(float(yVelocity[i] - (gravity * timestep) - (dragconstant * yVelocity[i] * Velocity[i] * timestep)))
+    y.append(float(y[i] + yVelocity[i] * timestep))
+    Velocity.append(float(math.sqrt(xVelocity[i+1]**2 + yVelocity[i+1]**2)))
+
+    return x,y,xVelocity,yVelocity
+
+def wDensityChange(x,y,xVelocity,yVelocity,Velocity,i,timestep):
+    """Given the x and y positions and x and y velocities, this program returns the new x,y positions and x,y velocities, one timestep later. Taking into account drag and variable air density
+
+    ARGS:
+        x (list): List of previous x positions
+        y (list): List of previous y positions
+        xVelocity (list): List of previous x velocities
+        yVelocity (list): List of previous y velocities
+        i (int): The iterator count
+        timestep: The timestep
+
+    RETURNS:
+        x (list of floats): same list of x positions, with new x position appended to the previous list
+        y (list of floats): same list of y positions, with new y position appended to the previous list
+        xVelocity (list of floats): same list of x velocities, with new x velocity appended to the previous list
+        yVelocity (list of floats): same list of y velocities, with new y velocity appended to the previous list
+    """
+
+    
+    tempAtSeaLevel = 283.15
+    a = 6.5e-3
+    
+    xVelocity.append(float(xVelocity[i] - ((1 - ((a * y[i])/tempAtSeaLevel)) * (dragconstant * xVelocity[i] * Velocity[i] * timestep))))
+    x.append(float(x[i] + xVelocity[i] * timestep))
+    yVelocity.append(float(yVelocity[i] - (gravity * timestep) - ((1 - ((a * y[i])/tempAtSeaLevel)) * (dragconstant * yVelocity[i] * Velocity[i] * timestep))))
+    y.append(float(y[i] + yVelocity[i] * timestep))
+    Velocity.append(float(math.sqrt(xVelocity[i+1]**2 + yVelocity[i+1]**2)))
+
+    return x,y,xVelocity,yVelocity
