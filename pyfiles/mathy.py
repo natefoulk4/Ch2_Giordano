@@ -83,3 +83,9 @@ def wDensityChange(x,y,xVelocity,yVelocity,Velocity,i,timestep):
     Velocity.append(float(math.sqrt(xVelocity[i+1]**2 + yVelocity[i+1]**2)))
 
     return x,y,xVelocity,yVelocity
+
+def square(x):
+
+    return x**2
+
+

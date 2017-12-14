@@ -111,7 +111,7 @@ def plotMethods(initialVelocity, angle, timestep):
     x3, y3, projectileRange3  = calculatePath(initialVelocity, angle, timestep, 3)
     
     #Plot path of projectile
-    plt.plot(x1,y1, label = "Without drag")
+    #plt.plot(x1,y1, label = "Without drag")
     plt.plot(x2,y2, label = "With drag")
     plt.plot(x3,y3, label = "With variable air density")
     plt.xlabel('Distance')
@@ -156,7 +156,8 @@ def plotTimeSteps(initialVelocity, angle):
     plt.show()
 
 
-
 plot(initialVelocity, angle, timestep, choice)
+#plotMethods(initialVelocity, angle, timestep)
+#plotTimeSteps(initialVelocity, angle)
 
  
