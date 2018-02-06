@@ -1,0 +1,15 @@
+#!/bin/bash
+
+counter=1
+while [ $counter -le $1 ]
+do
+    python - <<END
+x = 2 + 2
+END
+    echo x
+    ((counter++))
+done
+
+
+
+     

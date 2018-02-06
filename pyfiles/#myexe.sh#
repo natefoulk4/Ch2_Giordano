@@ -1,0 +1,12 @@
+#!/bin/bash
+
+counter=1
+while [ $counter -le $1 ]
+do
+    python - from looper import c
+    ((counter++))
+done
+
+
+
+     
